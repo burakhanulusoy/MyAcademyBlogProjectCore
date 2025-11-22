@@ -1,0 +1,24 @@
+﻿@model UpdateCategoryDto
+@{
+    ViewData["Title"] = "UpdateCategory";
+}
+
+<h1>Kategori Güncelleme </h1>
+
+<form method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+
+    <div class="form-check">
+
+        <label>Kategori Adı</label>
+        <input class="form-control" asp-for="Name" type="text" />
+        <br />
+        <span asp-validation-for="Name" class="text-danger"></span>
+
+    </div>
+
+    <button class="btn btn-primary">Güncelle</button>
+
+</form>
