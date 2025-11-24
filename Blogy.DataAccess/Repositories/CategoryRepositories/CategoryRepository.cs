@@ -16,5 +16,14 @@ namespace Blogy.DataAccess.Repositories.CategoryRepositories
         {
             return await _table.AnyAsync(filter);//varsa true yoksa false döner ef core methodu
         }
+
+      
+
+        public async Task<List<Category>> GetCategoriesWithBlogsAsync()
+        {
+         
+           return  await _table.AsNoTracking().Include(x=>x.Blogs).ToListAsync();
+
+        }
     }
 }

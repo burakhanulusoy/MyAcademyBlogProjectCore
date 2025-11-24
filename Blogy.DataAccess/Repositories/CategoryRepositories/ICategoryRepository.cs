@@ -9,5 +9,9 @@ namespace Blogy.DataAccess.Repositories.CategoryRepositories
 
         Task<bool> AnyHaveCategoryAsync(Expression<Func<Category, bool>> filter);
 
+        Task<List<Category>> GetCategoriesWithBlogsAsync();
+
+
+
     }
 }

@@ -1,0 +1,66 @@
+﻿@model List<ResultBlogDto>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int count = 0;
+}
+
+<h1>Tüm Blog Yazıları</h1>
+
+<table class="table table-bordered table-hover">
+
+    <tr>
+
+        <td>#</td>
+        <td>Blog Başlığı</td>
+        <td>Blog Yazısı</td>
+        <td>Ana Fotoğraf</td>
+        <td>1.Alt Fotoğraf</td>
+        <td>Kategori Id</td>
+        <td>2.Alt Fotoğraf</td>
+        <td>İşlemler</td>
+
+    </tr>
+
+
+
+    @foreach(var blog in Model)
+    {
+        count++;
+        <tr>
+
+            <td>@count</td>
+            <td>@blog.Title</td>
+            <td>@(blog.Description.Length>120 ? blog.Description.Substring(0,120)+" ..." : blog.Description+"." )</td>
+            <td>
+                <img src="@blog.CoverImage" style="width:100px;height:100px;" />
+            </td>
+            <td>
+                <img src="@blog.BlogImage1" style="width:100px;height:100px;" />
+            </td>
+            <td>
+                @blog.Category.CategoryName
+            </td>
+
+            <td>
+                <img src="@blog.BlogImage2" style="width:100px;height:100px;" />
+            </td>
+            <td>
+                <a onclick="return confirm('silmek isetdiğine emin misiniz?')" href="/Admin/Blog/DeleteBlog/@blog.Id" class="btn btn-danger">Sil</a>
+                <a href="/Admin/Blog/UpdateBlog/@blog.Id" class="btn btn-primary">Güncelle</a>
+
+            </td>
+
+        </tr>
+
+         
+
+    }
+
+</table>
+<a href="/Admin/Blog/CreateBlog" class="btn btn-success">Yeni Blog Oluştur</a>
+
+
+

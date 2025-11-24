@@ -62,6 +62,14 @@ namespace Blogy.Business.Services.CategoryServices
 
         }
 
+        public async Task<List<ResultCategoryDto>> GetCategoriesWithBlogsAsync()
+        {
+            var categories=await _categoryRepository.GetCategoriesWithBlogsAsync();
+            return _mapper.Map<List<ResultCategoryDto>>(categories); 
+
+
+        }
+
         public async Task UpdateCategoryAsync(UpdateCategoryDto updateCategoryDto)
         {
             var IsHaveName = await _categoryRepository.AnyHaveCategoryAsync(x => x.Name == updateCategoryDto.Name);

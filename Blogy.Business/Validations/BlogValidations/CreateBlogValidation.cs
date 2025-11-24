@@ -12,7 +12,6 @@ namespace Blogy.Business.Validations.BlogValidations
                                .MinimumLength(5).WithMessage("Baþlýk en az 5 karakter olabilir");
 
             RuleFor(x => x.Description).NotEmpty().WithMessage("Açýklama boþ geçilemez")
-                                      .MaximumLength(500).WithMessage("Açýklama en fazla 500 karakter olabilir")
                                       .MinimumLength(20).WithMessage("Açýklama en az 20 karakter olabilir");
                                       
                                       
@@ -20,6 +19,9 @@ namespace Blogy.Business.Validations.BlogValidations
             RuleFor(x=>x.CoverImage).NotEmpty().WithMessage("Ana Fotoðraf boþ geçilemez");
             RuleFor(x=>x.BlogImage1).NotEmpty().WithMessage("1. Alt Fotoðraf boþ geçilemez");
             RuleFor(x=>x.BlogImage2).NotEmpty().WithMessage("2. Alt Fotoðraf boþ geçilemez");
+
+            RuleFor(x => x.CategoryId).NotEmpty().WithMessage("Kategori boþ geçilemez");
+
         }
     }
 }

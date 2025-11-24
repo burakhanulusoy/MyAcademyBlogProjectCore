@@ -1,4 +1,5 @@
 using Blogy.Business.Mappings;
+using Blogy.Business.Services.BlogServices;
 using Blogy.Business.Services.CategoryServices;
 using Blogy.Business.Validations.CategoryValidations;
 using Blogy.DataAccess.Context;
@@ -18,6 +19,9 @@ builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 
 builder.Services.AddScoped<IBlogRepository,BlogRepository>();
+builder.Services.AddScoped<IBlogService,BlogService>();
+
+
 builder.Services.AddScoped<IBlogTagRepository,BlogTagRepository>();
 
 builder.Services.AddAutoMapper(typeof(CategoryMappings).Assembly);

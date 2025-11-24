@@ -14,6 +14,7 @@ namespace Blogy.Business.Services.CategoryServices
         Task UpdateCategoryAsync(UpdateCategoryDto updateCategoryDto);
         Task DeleteCategoryAsync(int id);
 
+        Task<List<ResultCategoryDto>> GetCategoriesWithBlogsAsync();
 
 
 
