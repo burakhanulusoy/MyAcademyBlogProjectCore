@@ -40,15 +40,7 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
 
         }
 
-        public async Task<IActionResult> Dele teRole(int id)
-        {
-            var role=await _roleManager.FindByIdAsync(id.ToString());
-            
-            await _roleManager.DeleteAsync(role);
-            return RedirectToAction("Index");
-
-
-        }
+     
         
 
 
