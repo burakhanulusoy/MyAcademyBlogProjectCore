@@ -62,7 +62,16 @@ namespace Blogy.Business.Validations.UserValidations
             };
         }
 
+        public override IdentityError DuplicateRoleName(string role)
+        {
 
+            return new IdentityError()
+            {
+                Code = "DuplicateRoleName",
+                Description = $"{role} adlý rol zaten mevcut. Lütfen farklý bir rol adý giriniz."
+            };
+
+        }
 
     }
 }
