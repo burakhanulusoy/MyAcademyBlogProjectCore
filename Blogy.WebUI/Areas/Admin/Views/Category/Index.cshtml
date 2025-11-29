@@ -1,39 +1,126 @@
 ﻿@model List<ResultCategoryDto>
 @{
     ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminUI/Index.cshtml";
     int count = 0;
-    Layout = "~/Views/Shared/_Layout.cshtml"; 
+    
 }
 
-<h3>Tüm Kategoriler</h3>
 
-<table class="table table-bordered table-hover">
+<div class="main-content-container overflow-hidden">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
+        <h3 class="mb-0">Kategoriler</h3>
 
-    <tr>
-        <th>#</th>
-        <th>Kategori Adı</th>
-        <th>İşlemler</th>
-    </tr>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb align-items-center mb-0 lh-1">
+                <li class="breadcrumb-item">
+                    <a href="index.html" class="d-flex align-items-center text-decoration-none">
+                        <i class="ri-home-8-line fs-15 text-primary me-1"></i>
+                        <span class="text-body fs-14 hover">Dashboard</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span>Tüm Kategoriler</span>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span class="text-secondary">Listesi</span>
+                </li>
+            </ol>
+        </nav>
+    </div>
 
-    @foreach(var item in Model)
-    {
-        count++;
-        <tr>
-         <th>@count</th>
-         <th>@item.CategoryName</th>
-         <th>
-                <a href="/Admin/Category/DeleteCategory/@item.Id" class="btn btn-danger">Sil</a>
-                <a href="/Admin/Category/UpdateCategory/@item.Id" class="btn btn-primary">Güncelle</a>
-
-
-         </th>
-     </tr>
+    <div class="row">
         
-    }
+        @foreach(var categories in Model)
+        {
+           int blogCount = 0;
+            count++;
+
+            <div class="col-lg-3">
+                <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+
+                    <div class="d-flex align-items-center mb-12">
+                        <div class="flex-shrink-0">
+                            <div class="bg-light rounded-circle overflow-hidden text-center"
+                                 style="width: 100px; height: 100px;">
+                                <img src="@categories.CategoryImage" alt="client1"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                        </div>
+
+                        <div class="flex-grow-1 ms-3">
+                            <h3 style="margin-bottom: 5px;">@categories.CategoryName</h3>
+                            <span style="font-weight:800" class="fs-16">@count</span>
+                        </div>
+                    </div>
+
+    
+                    
+                    @foreach(var blog in categories.Blogs)
+                    {
+                        blogCount++;
+
+                    }
+                    <div class="d-flex flex-wrap gap-2 align-items-center">
+                        <a href="/Admin/Category/UpdateCategory/@categories.Id" class="btn btn-info fs-16 fw-normal text-white rounded-pill">Güncelle</a>
+                        <a href="/Admin/Blog/GetBlogId/@categories.CategoryName/@categories.Id" class="btn btn-warning fs-16 fw-normal text-white rounded-pill">Blogları Gör</a>
+                        <a href="/Admin/Category/DeleteCategory/@categories.Id" class="btn btn-danger fs-16 fw-normal text-white rounded-pill">Sil</a>
+
+                    </div>
+                   
+
+
+                    <ul class="p-0 list-unstyled last-child-none" style="margin-bottom: 17px;">
+                        <li class="mb-10">
+                            <span class="fs-16">Toplam Blog Sayısı:</span>
+                            <span class="fs-16 text-secondary">@blogCount</span>
+                        </li>
+                       
+                        <li class="mb-10">
+                            <span class="fs-16">Kategori Oluşturan:</span>
+                            <span class="fs-16 text-secondary">@categories.Creator</span>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
 
 
 
+        }
 
-</table>
+        <div class="col-lg-12">
 
-<a href="/Admin/Category/CreateCategory" class="btn btn-success">Yeni Kategori Oluştur</a>
+            <a href="/Admin/Category/CreateCategory" class="btn btn-secondary fs-16 fw-normal text-white"><i class="ri-add-line"></i> Yeni Kategori Oluştur</a>
+            <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap mb-4">
+                <span class="fs-15">Showing 1 to 12 of 50 entries</span>
+
+                <nav class="custom-pagination" aria-label="Page navigation example">
+                    <ul class="pagination mb-0 justify-content-center">
+                        <li class="page-item">
+                            <button class="page-link icon" aria-label="Previous">
+                                <i class="material-symbols-outlined">west</i>
+                            </button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link active">1</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link">2</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link">3</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link icon" aria-label="Next">
+                                <i class="material-symbols-outlined">east</i>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+

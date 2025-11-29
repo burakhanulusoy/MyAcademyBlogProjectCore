@@ -10,6 +10,7 @@ namespace Blogy.Business.DTOs.BlogDtos
         public string? CoverImage { get; set; }
         public string? BlogImage1 { get; set; }
         public string? BlogImage2 { get; set; }
+        public bool Status { get; set; }
 
         public int CategoryId { get; set; }
 

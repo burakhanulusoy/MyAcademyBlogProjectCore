@@ -15,6 +15,7 @@ namespace Blogy.Business.DTOs.BlogDtos
 
         public int CategoryId { get; set; }
         public ResultCategoryDto Category { get; set; }
+        public bool Status { get; set; }
 
 
     }

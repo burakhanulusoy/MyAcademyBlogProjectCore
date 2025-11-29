@@ -1,0 +1,174 @@
+﻿@model List<ResultBlogDto>
+@{
+    ViewData["Title"] = "GetBlogId";
+    Layout = "~/Views/AdminUI/Index.cshtml";
+    int count = 0;
+}
+
+
+
+<div class="main-content-container overflow-hidden">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
+        <h3 class="mb-0">@ViewBag.categoryNamee Kategorisi'ne Ait Blog Yazıları.</h3>
+
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb align-items-center mb-0 lh-1">
+                <li class="breadcrumb-item">
+                    <a href="index.html" class="d-flex align-items-center text-decoration-none">
+                        <i class="ri-home-8-line fs-15 text-primary me-1"></i>
+                        <span class="text-body fs-14 hover">Dashboard</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span>Blog Yazıları</span>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span class="text-secondary">@ViewBag.categoryNamee</span>
+                </li>
+            </ol>
+        </nav>
+    </div>
+
+    <div class="card bg-white rounded-10 border border-white mb-4">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 p-20">
+            <form class="table-src-form position-relative m-0">
+                <input type="text" class="form-control w-350" placeholder="Search here...">
+                <div class="src-btn position-absolute top-50 start-0 translate-middle-y bg-transparent p-0 border-0">
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+            </form>
+
+            <div class="dropdown select-dropdown without-border">
+                <button class="dropdown-toggle bg-transparent text-secondary fs-15" data-bs-toggle="dropdown" aria-expanded="false">
+                    This Week
+                </button>
+
+                <ul class="dropdown-menu dropdown-menu-end bg-white border-0 box-shadow rounded-10" data-simplebar>
+                    <li>
+                        <button class="dropdown-item text-secondary">This Day</button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item text-secondary">This Week</button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item text-secondary">This Month</button>
+                    </li>
+                    <li>
+                        <button class="dropdown-item text-secondary">This Year</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="default-table-area mx-minus-1 table-product-list">
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                          
+                            <th scope="col" class="fw-medium ps-0">#</th>
+                            <th scope="col" class="fw-medium">Kategorisi</th>
+                            <th scope="col" class="fw-medium">Blog Yazısı</th>
+                
+                            <th scope="col" class="fw-medium">Tarih</th>
+                            <th scope="col" class="fw-medium">Blog Yazısı Aktiflik Durumu</th>
+                            <th scope="col" class="fw-medium">İşlemeler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach(var item in Model)
+                        {
+
+                            count++;
+                            <tr>
+                           
+                            <th class="text-body ps-0">@count</th>
+                            <td class="text-body">
+                                <div class="d-flex align-items-center">
+                                    <a href="#" class="flex-shrink-0">
+                                        <img src="@item.CoverImage" style="width: 70px; height: 70px;" class="rounded-circle" alt="product6">
+                                    </a>
+                                    <div class="flex-grow-1 ms-12">
+                                            <a href="product-details.html" class="fs-16 text-secondary text-decoration-none hover-text fw-medium">@ViewBag.categoryNamee</a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-shrink-0">
+                                            <img src="@ViewBag.userPhoto" class="rounded-circle" style="width: 50px; height: 50px;" alt="@ViewBag.userName">
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                            <span class="fw-medium fs-16 text-secondary"><span class="text-body">By</span>@ViewBag.userName </span>
+                                        <p class="fs-15 lh-1-8 text-body" style="width: 300px;"> @(item.Description.Length>100 ? item.Description.Substring(0,100)+" ..." :item.Description +" .")</p>
+                                    </div>
+                                </div>
+                            </td>
+                            
+                            <td class="text-body">@item.CreatedDate.ToShortDateString()</td>
+                         
+                            
+                            <td>
+                                <span class="text-primary bg-primary bg-opacity-10 fs-15 fw-normal d-inline-block default-badge">@(item.Status ? "Aktif Blog" :"Pasif Blog")</span>
+                            </td>
+
+
+                            <td>
+                                <div class="d-flex justify-content-end" style="gap: 12px;">
+                                    <button class="bg-transparent p-0 border-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="View Review">
+                                        <i class="material-symbols-outlined fs-16 fw-normal text-primary">visibility</i>
+                                    </button>
+                                    <button class="bg-transparent p-0 border-0 hover-text-danger" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete">
+                                        <i class="material-symbols-outlined fs-16 fw-normal text-body">delete</i>
+                                    </button>
+                                        <a class="btn btn-primary" href="/Admin/Blog/DoNonActive/@item.Id" disabled>
+                                            <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+                                            <span role="status">Yazıyı Pasif Yap</span>
+                                        </a>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                      
+                        }
+
+
+
+
+                       
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="d-flex justify-content-center justify-content-sm-between align-items-center text-center flex-wrap gap-2 showing-wrap pt-15 p-20">
+                <span class="fs-15">Showing 1 to 10 of 50 entries</span>
+
+                <nav class="custom-pagination" aria-label="Page navigation example">
+                    <ul class="pagination mb-0 justify-content-center">
+                        <li class="page-item">
+                            <button class="page-link icon" aria-label="Previous">
+                                <i class="material-symbols-outlined">west</i>
+                            </button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link active">1</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link">2</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link">3</button>
+                        </li>
+                        <li class="page-item">
+                            <button class="page-link icon" aria-label="Next">
+                                <i class="material-symbols-outlined">east</i>
+                            </button>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

@@ -72,6 +72,16 @@ namespace Blogy.Business.Validations.UserValidations
             };
 
         }
+        public override IdentityError PasswordMismatch()
+        {
+            return new IdentityError()
+            {
+                Code = "PasswordMismatch",
+                Description = "Mevcut þifreniz yanlýþ!"
+            };
+        }
+
+
 
     }
 }

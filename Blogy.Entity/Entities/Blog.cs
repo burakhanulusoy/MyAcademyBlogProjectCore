@@ -24,6 +24,8 @@ namespace Blogy.Entity.Entities
 
         public IList<Comment> Comments { get; set; }
 
+        public bool Status { get; set; }
+
 
     }
 }

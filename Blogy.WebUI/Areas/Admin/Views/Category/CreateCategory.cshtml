@@ -1,25 +1,65 @@
 ﻿@model CreateCategoryDto
 @{
     ViewData["Title"] = "CreateCategory";
-
+    Layout = "~/Views/AdminUI/Index.cshtml";
 }
+<div class="main-content-container overflow-hidden">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4 mt-1">
+        <h3 class="mb-0">Yeni Kategori Oluşturun</h3>
 
-<h1>Yeni Kategori Oluştur</h1>
-
-<form method="post">
-
-    <div class="form-group">
-        <label>Kategori Adı</label>
-        <input class="form-control" asp-for="Name" type="text"  />
-        <br />
-        <span class="text-danger" asp-validation-for="Name"></span>
-        <br />
-
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb align-items-center mb-0 lh-1">
+                <li class="breadcrumb-item">
+                    <a href="index.html" class="d-flex align-items-center text-decoration-none">
+                        <i class="ri-home-8-line fs-15 text-primary me-1"></i>
+                        <span class="text-body fs-14 hover">Dashboard</span>
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span>Kategoriler</span>
+                </li>
+               
+                <li class="breadcrumb-item active" aria-current="page">
+                    <span class="text-secondary">Yeni Kategori Ekle</span>
+                </li>
+            </ol>
+        </nav>
     </div>
 
-    <button class="btn btn-success">Oluştur</button>
-
-</form>
-
-
-
+    <div class="card bg-white p-20 rounded-10 border border-white mb-4">
+        <h3 class="mb-20">Add New Category</h3>
+        <form method="post">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mb-20">
+                        <label class="label fs-16 mb-2">Kategori Adı</label>
+                        <div class="form-floating">
+                            <input asp-for="Name" type="text" class="form-control" id="floatingInput1" placeholder="Category name">
+                            <label for="floatingInput1">Kategori adı gir</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mb-20">
+                        <label class="label fs-16 mb-2">Kategori Fotoğraf Url</label>
+                        <div class="form-floating">
+                            <input type="url" asp-for="CategoryImage" class="form-control" id="floatingInput2" placeholder="Slug">
+                            <label for="floatingInput2">Kategori fotoğraf url gir</label>
+                        </div>
+                    </div>
+                    <span class="text-danger">@Html.ValidationSummary()</span>
+                </div>
+                
+                
+              
+              
+                <div class="col-lg-12">
+                    <div class="d-flex gap-2">
+                        <button  class="btn btn-primary fw-normal text-white">Kategori Oluştur</button>
+                        <a href="/Admin/Category/Index" class="btn btn-danger fw-normal text-white" data-bs-dismiss="modal">İptal</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

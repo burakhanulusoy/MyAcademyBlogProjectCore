@@ -1,8 +1,10 @@
 ﻿using Blogy.Business.DTOs.CategoryDtos;
 using Blogy.Business.Services.CategoryServices;
+using Blogy.Entity.Entities;
 using Blogy.WebUI.Consts;
 using Humanizer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -11,23 +13,25 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
     [Area("Admin")]
     [Authorize(Roles = Roles.Admin)]
 
-    public class CategoryController(ICategoryService _categoryService) : Controller
+    public class CategoryController(ICategoryService _categoryService,UserManager<AppUser> _userManager) : Controller
     {
         public async Task<IActionResult> Index()
         {
-            var categories = await _categoryService.GetAllCategoryAsync();
+            var categories = await _categoryService.GetCategoriesWithBlogsAsync();
             return View(categories);
 
         }
 
-        public IActionResult CreateCategory()
+        public async Task<IActionResult> CreateCategory()
         {
+
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> CreateCategory(CreateCategoryDto createCategoryDto)
         {
+
 
             if (!ModelState.IsValid)
             {
@@ -36,6 +40,8 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
 
             try
             {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                createCategoryDto.Creator=user.FirstName+" "+user.LastName;
                 await _categoryService.CreateCategoryAsync(createCategoryDto);
                 return RedirectToAction("Index");
 
@@ -73,6 +79,8 @@ namespace Blogy.WebUI.Areas.Admin.Controllers
             }
             try
             {
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                updateCategoryDto.Creator = user.FirstName + " " + user.LastName;
                 await _categoryService.UpdateCategoryAsync(updateCategoryDto);
                 return RedirectToAction(nameof(Index));
 

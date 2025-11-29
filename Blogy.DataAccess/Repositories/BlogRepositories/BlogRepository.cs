@@ -22,6 +22,8 @@ namespace Blogy.DataAccess.Repositories.BlogRepositories
 
         }
 
+       
+
         public async Task<List<Blog>> GetLast3BlogsAsync()
         {
            
